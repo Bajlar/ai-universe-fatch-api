@@ -61,19 +61,19 @@ const toggleSpinner = isLoading => {
 
 // unique category fetch by id
 const singleCategory = (id) => {
-  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id ? id : 'Not found'}`;
   fetch(url)
     .then(res => res.json())
     .then(data => categoryDetails(data.data))
-    .catch(erroe => {
-      console.log(erroe);
-    })
+    // .catch(erroe => {
+    //   console.log(erroe);
+    // })
 }
 
 // category details
 const categoryDetails = (category) => {
   console.log(category);
-  const {description, features, integrations, input_output_examples, pricing, image_link} = category;
+  const {description, features, integrations, input_output_examples, pricing, image_link, accuracy} = category;
   const containerDetails = document.getElementById('container-details');
   containerDetails.innerHTML = `
   <div class="row">
@@ -127,7 +127,7 @@ const categoryDetails = (category) => {
           <p class="card-text text-muted">${input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}</p>
       </div>
       <div>
-        <button class="btn btn-danger position-absolute top-0 end-0">94% accuracy</button>
+        <button class="btn btn-danger position-absolute top-0 end-0">${accuracy.score ? accuracy.score : 'Not found'}</button>
       </div>
     </div>
   </div>
@@ -147,6 +147,3 @@ const showAllDataTogether = () => {
     })
     toggleSpinner(true);
 }
-
-
-
