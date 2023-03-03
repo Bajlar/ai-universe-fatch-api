@@ -15,7 +15,7 @@ const displayShowData = (tools) => {
   featuresContainer.innerHTML = '';
   tools.forEach(tool => {
     const {id, name, image, features, published_in} = tool;
-    console.log(tool);
+    // console.log(tool);
     const div = document.createElement('div');
     div.classList.add('col');
     div.innerHTML = `
@@ -24,9 +24,10 @@ const displayShowData = (tools) => {
       <div class="card-body">
         <h3 class="card-title fw-semibold">Features</h3>
         <ol>
-          <li>${features[0]}</li>
-          <li>${features[1]}</li>
+          <li>${features[0] ? features[0] : 'Not Found'}</li>
+          <li>${features[1] ? features[1] : 'Not Found'}</li>
           <li>${features[2] ? features[2] : 'Not Found'}</li>
+          <li>${features[3] ? features[3] : 'Not Found'}</li>
         </ol>
         <hr>
         <div class="d-flex justify-content-between align-items-center">
@@ -61,13 +62,13 @@ const toggleSpinner = isLoading => {
 
 // unique category fetch by id
 const singleCategory = (id) => {
-  const url = `https://openapi.programming-hero.com/api/ai/tool/${id ? id : 'Not found'}`;
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
   fetch(url)
     .then(res => res.json())
     .then(data => categoryDetails(data.data))
-    // .catch(erroe => {
-    //   console.log(erroe);
-    // })
+    .catch(erroe => {
+      console.log(erroe);
+    })
 }
 
 // category details
@@ -99,9 +100,9 @@ const categoryDetails = (category) => {
             <div>
               <h5 class="card-title fw-semibold">Features</h5>
               <ol>
-                <li>Value null</li>
-                <li>Value null</li>
-                <li>Value null</li>
+                <li>${features[1]['feature_name']}</li>
+                <li>${features[2]['feature_name']}</li>
+                <li>${features[3]['feature_name']}</li>
               </ol>
             </div>
             <div>
