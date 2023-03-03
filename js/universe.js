@@ -46,6 +46,17 @@ const displayShowData = (tools) => {
     `;
     featuresContainer.appendChild(div);
   });
+  toggleSpinner(false);
+}
+
+// spinner option
+const toggleSpinner = isLoading => {
+  const spinner = document.getElementById('spinner');
+  if(isLoading) {
+    spinner.classList.remove('d-none');
+  } else {
+    spinner.classList.add('d-none');
+  }
 }
 
 // unique category fetch by id
@@ -134,6 +145,7 @@ const showAllDataTogether = () => {
     .catch(error => {
       console.log(error);
     })
+    toggleSpinner(true);
 }
 
 
