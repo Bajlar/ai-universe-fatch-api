@@ -135,3 +135,6 @@ const showAllDataTogether = () => {
       console.log(error);
     })
 }
+
+
+
