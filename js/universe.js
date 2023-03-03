@@ -48,7 +48,6 @@ const displayShowData = (tools) => {
   });
 }
 
-
 // unique category fetch by id
 const singleCategory = (id) => {
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
@@ -126,6 +125,7 @@ const categoryDetails = (category) => {
 
 fetchLoadData();
 
+// display show the all card function
 const showAllDataTogether = () => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   fetch(url)
