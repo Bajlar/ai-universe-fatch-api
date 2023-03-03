@@ -73,7 +73,7 @@ const singleCategory = (id) => {
 
 // category details
 const categoryDetails = (category) => {
-  console.log(category);
+  // console.log(category);
   const {description, features, integrations, input_output_examples, pricing, image_link, accuracy} = category;
   const containerDetails = document.getElementById('container-details');
   containerDetails.innerHTML = `
@@ -82,7 +82,7 @@ const categoryDetails = (category) => {
       <div class="card">
         <div class="card-body">
           <h6 class="card-title">${description}</h6>
-          <div class="d-flex gap-2">
+          <div class="d-flex justify-content-center align-items-center gap-2">
             <div class="text-success rounded-3 bg-light p-2">
               <p class="p-0 m-0">${pricing[0].plan ? pricing[0].plan : 'Free'}</p>
               <p class="p-0 m-0">${pricing[0].price ? pricing[0].price : 'of Cost'}</p>
