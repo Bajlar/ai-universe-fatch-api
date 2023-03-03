@@ -49,3 +49,13 @@ const displayShowData = (tools) => {
 }
 
 fetchLoadData();
+
+const showAllDataTogether = () => {
+  const url = `https://openapi.programming-hero.com/api/ai/tools`;
+  fetch(url)
+    .then(res => res.json())
+    .then(data => displayShowData(data.data.tools))
+    .catch(error => {
+      console.log(error);
+    })
+}
