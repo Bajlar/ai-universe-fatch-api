@@ -48,6 +48,82 @@ const displayShowData = (tools) => {
   });
 }
 
+
+// unique category fetch by id
+const singleCategory = (id) => {
+  const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+  fetch(url)
+    .then(res => res.json())
+    .then(data => categoryDetails(data.data))
+    .catch(erroe => {
+      console.log(erroe);
+    })
+}
+
+// category details
+const categoryDetails = (category) => {
+  console.log(category);
+  const {description, features, integrations, input_output_examples, pricing, image_link} = category;
+  const containerDetails = document.getElementById('container-details');
+  containerDetails.innerHTML = `
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h6 class="card-title">${description}</h6>
+          <div class="d-flex gap-2">
+            <div class="text-success rounded-3 bg-light p-2">
+              <p class="p-0 m-0">${pricing[0].plan ? pricing[0].plan : 'Free'}</p>
+              <p class="p-0 m-0">${pricing[0].price ? pricing[0].price : 'of Cost'}</p>
+            </div>
+            <div class="text-warning rounded-3 bg-light p-2">
+              <p class="p-0 m-0">${pricing[1].plan ? pricing[1].plan : 'Free'}</p>
+              <p class="p-0 m-0">${pricing[1].price ? pricing[1].price : 'of Cost'}</p>
+            </div>
+            <div class="text-danger rounded-3 bg-light p-2">
+              <p class="p-0 m-0">${pricing[2].plan ? pricing[2].plan : 'Free'}</p>
+              <p class="p-0 m-0">${pricing[2].price ? pricing[2].price : 'of Cost'}</p>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-2">
+            <div>
+              <h5 class="card-title fw-semibold">Features</h5>
+              <ol>
+                <li>Value null</li>
+                <li>Value null</li>
+                <li>Value null</li>
+              </ol>
+            </div>
+            <div>
+              <h5 class="card-title fw-semibold">Integrations</h5>
+              <ol>
+                <li>${integrations[0] ? integrations[0] : 'Not found'}</li>
+                <li>${integrations[1] ? integrations[1] : 'Not found'}</li>
+                <li>${integrations[2] ? integrations[2] : 'Not found'}</li>
+                <li>${integrations[3] ? integrations[3] : 'Not found'}</li>
+                <li>${integrations[4] ? integrations[4] : 'Not found'}</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <div class="card position-relative">
+        <img src="${image_link[0] ? image_link[0] : 'https://itchronicles.com/wp-content/uploads/2020/09/How-Facebook-uses-Artificial-intelligence-1024x576.jpg'}" class="img-fluid p-3" alt="">
+        <div class="card-body text-center">
+          <h5 class="card-title">${input_output_examples[0].input ? input_output_examples[0].input : 'Can you give any example?'}</h5>
+          <p class="card-text text-muted">${input_output_examples[0].output ? input_output_examples[0].output : 'No! Not Yet! Take a break!!!'}</p>
+      </div>
+      <div>
+        <button class="btn btn-danger position-absolute top-0 end-0">94% accuracy</button>
+      </div>
+    </div>
+  </div>
+  `;
+}
+
 fetchLoadData();
 
 const showAllDataTogether = () => {
