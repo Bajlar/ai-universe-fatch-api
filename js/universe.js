@@ -15,7 +15,7 @@ const displayShowData = (tools) => {
   featuresContainer.innerHTML = '';
   tools.forEach(tool => {
     const {id, name, image, features, published_in} = tool;
-    // console.log(tool);
+    console.log(tool);
     const div = document.createElement('div');
     div.classList.add('col');
     div.innerHTML = `
@@ -73,9 +73,14 @@ const singleCategory = (id) => {
 
 // category details
 const categoryDetails = (category) => {
-  // console.log(category);
+  console.log(category);
   const {description, features, integrations, input_output_examples, pricing, image_link, accuracy} = category;
+  console.log(1, description);
+  console.log(2, pricing);
+  console.log(3, features[1]['feature_name']);
+  console.log(4, integrations[0]);
   const containerDetails = document.getElementById('container-details');
+  containerDetails.innerHTML = '';
   containerDetails.innerHTML = `
   <div class="row">
     <div class="col-md-6">
@@ -84,25 +89,25 @@ const categoryDetails = (category) => {
           <h6 class="card-title">${description}</h6>
           <div class="d-flex justify-content-center align-items-center gap-2">
             <div class="text-success rounded-3 bg-light p-2">
-              <p class="p-0 m-0">${pricing[0].plan ? pricing[0].plan : 'Free'}</p>
-              <p class="p-0 m-0">${pricing[0].price ? pricing[0].price : 'of Cost'}</p>
+              <p class="p-0 m-0">${pricing && pricing[0]?.plan ? pricing[0]?.plan : 'Free'}</p>
+              <p class="p-0 m-0">${pricing[0]?.price ? pricing[0]?.price : 'of Cost'}</p>
             </div>
             <div class="text-warning rounded-3 bg-light p-2">
-              <p class="p-0 m-0">${pricing[1].plan ? pricing[1].plan : 'Free'}</p>
-              <p class="p-0 m-0">${pricing[1].price ? pricing[1].price : 'of Cost'}</p>
+              <p class="p-0 m-0">${pricing[1]?.plan ? pricing[1]?.plan : 'Free'}</p>
+              <p class="p-0 m-0">${pricing[1]?.price ? pricing[1]?.price : 'of Cost'}</p>
             </div>
             <div class="text-danger rounded-3 bg-light p-2">
-              <p class="p-0 m-0">${pricing[2].plan ? pricing[2].plan : 'Free'}</p>
-              <p class="p-0 m-0">${pricing[2].price ? pricing[2].price : 'of Cost'}</p>
+              <p class="p-0 m-0">${pricing[2]?.plan ? pricing[2]?.plan : 'Free'}</p>
+              <p class="p-0 m-0">${pricing[2]?.price ? pricing[2]?.price : 'of Cost'}</p>
             </div>
           </div>
           <div class="d-flex justify-content-between mt-2">
             <div>
               <h5 class="card-title fw-semibold">Features</h5>
               <ol>
-                <li>${features[1]['feature_name']}</li>
-                <li>${features[2]['feature_name']}</li>
-                <li>${features[3]['feature_name']}</li>
+                <li>${category.features[1]['feature_name'] ? category.features[1]['feature_name'] : 'No found'}</li>
+                <li>${category.features[2]['feature_name'] ? category.features[2]['feature_name'] : 'No found'}</li>
+                <li>${category.features[3]['feature_name'] ? category.features[3]['feature_name'] : 'No found'}</li>
               </ol>
             </div>
             <div>
